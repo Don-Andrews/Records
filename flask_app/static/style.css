@@ -1,0 +1,232 @@
+/* BACKGROUND AND SIMPLE FONT COLORS: */
+
+*{
+    background-color: rgb(0, 0, 0);
+}
+
+img{
+    width: 150px;
+}
+
+td a img{
+    width: 30px;
+}
+
+.spotify-back-body{
+    background-color: rgb(0, 0, 0);
+}
+
+
+.navbar-brand:hover{
+    color:white
+}
+
+.spotify-words{
+    color: rgb(255, 255, 255);
+    font-family: 'Varela Round', sans-serif;
+    text-decoration: none;
+}
+
+.pink-words{
+    color: rgb(241, 139, 156);
+    font-family: 'Varela Round', sans-serif;
+}
+
+.red-words{
+    color: rgb(189, 6, 36);
+    font-family: 'Varela Round', sans-serif;
+}
+
+.blue-words{
+    color: rgb(45, 156, 230);
+    font-family: 'Varela Round', sans-serif;
+}
+.spotify-wordsgreen{
+    color: rgb(24, 190, 74);
+    font-family: 'Varela Round', sans-serif;
+}
+
+.spotify-wordsyellow{
+    color: rgb(228, 158, 9);
+    font-family: 'Varela Round', sans-serif;
+}
+
+.spotify-error-words{
+    color:  rgb(241, 139, 156); 
+}
+
+.spotify-right-words{
+    color: rgb(24, 190, 74);
+}
+
+.spotify-words-btns{
+    color: rgb(255, 255, 255);
+    font-family: 'Varela Round', sans-serif;
+}
+
+/* CREATE: */
+
+form input.spotify-words-btns.green-btn:hover{
+    color:  rgb(24, 190, 74); 
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+    border-bottom-color: rgb(171, 20, 190) !important;
+}
+
+form input.spotify-words-btns.red-btn:hover{
+    color:  rgb(241, 139, 156); 
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+    border-bottom-color: rgb(171, 20, 190) !important;
+}
+
+form input:hover{
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+    border-bottom-color: rgb(171, 20, 190) !important;
+}
+
+form select:hover{
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+    border-bottom-color: rgb(171, 20, 190) !important;
+}
+
+#logout:hover{
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+    border-bottom-color: rgb(171, 20, 190) !important;
+}
+
+/* DASHBOARD: */
+#base-btn-home.btn:hover{
+    color: rgb(241, 139, 156);
+    border-color: white;
+    border-left-color: rgb(241, 139, 156) !important;
+}
+
+#base-btn-areccs.btn:hover{
+    color: rgb(228, 158, 9);
+    border-color: white;
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+}
+
+#base-btn-mreccs.btn:hover{
+    color: rgb(24, 190, 74);
+    border-color: white;
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+}
+
+#base-btn-settings.btn:hover{
+    color: rgb(171, 20, 190);
+    border-color: white;
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+    border-bottom-color: rgb(171, 20, 190) !important;
+}
+
+.spotify-pubhead-border{
+    border-left-color: rgb(241, 139, 156);
+    border-top-color: rgb(228, 158, 9);
+    border-right-color: rgb(228, 158, 9);
+    border-bottom-color: rgb(228, 158, 9);
+}
+
+.spotify-pubbody-border{
+    border-left-color: rgb(241, 139, 156);
+    border-right-color: rgb(228, 158, 9);
+    border-bottom-color: rgb(241, 139, 156);
+}
+
+.spotify-privhead-border{
+    border-left-color: rgb(24, 190, 74);
+    border-top-color: rgb(171, 20, 190);
+    border-right-color: rgb(171, 20, 190);
+    border-bottom-color: rgb(171, 20, 190);
+}
+
+.spotify-privbody-border{
+    border-left-color: rgb(24, 190, 74);
+    border-bottom-color: rgb(24, 190, 74);
+    border-right-color: rgb(171, 20, 190);
+}
+
+
+.my-container{
+    position: relative;
+}
+
+.my-container input{
+    border-left-color: rgb(241, 139, 156) !important;
+    border-top-color: rgb(228, 158, 9) !important;
+    border-right-color: rgb(24, 190, 74) !important;
+    border-bottom-color: rgb(171, 20, 190) !important;
+}
+
+.my-container input[type="text"]{
+    color: white
+}
+
+::placeholder{
+    color: rgb(255, 255, 255);
+    font-family: 'Varela Round', sans-serif;
+}
+
+
+.dropdown-menu{
+    display: None;
+    position: absolute;
+    width: 100%;
+}
+
+.dropdown-menu.show{
+    display: block;
+    padding: 0;
+    border: none;
+    background-color: rgb(0, 0, 0);
+}
+
+.dropdown-item{
+    display: block;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    padding: 10px;
+}
+
+
+.search-input{
+    width: 100%;
+}
+
+.make-big{
+    width: 45%;
+}
+
+.differernt-position{
+    position: static;
+}
+
+/* Make Recc: */
+.add-gap{
+    gap: 25%;
+}
+
+.green-outline{
+    color: rgb(24, 190, 74);
+    border-color: rgb(24, 190, 74);
+}
+
+.gold-outline{
+    color: rgb(228, 158, 9);
+    border-color: rgb(228, 158, 9);
+}
+

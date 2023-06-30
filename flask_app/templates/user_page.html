@@ -1,0 +1,170 @@
+{% extends 'base.html' %} {% block content %}
+    <div class="spotify-back-body">
+        <div class="container spotify-words">
+            <div class="card-header  pb-3 spotify-words">
+                <h2><strong>Hello, {{logged_user.user_name}}</strong></h2>  
+            </div>
+            <div class="card-body">
+                <h3 class="text-center pb-3 mb-3"><strong>{{other_user.user_name}}'s Page</strong> </h3>
+                <div class=" d-flex align-items-center justify-content-center">
+                    <div>
+                        {% if fs %}
+                            {% if fs.friend_status == 'pending' %}
+                                <p class="spotify-wordsyellow text-center">Currently Pending!</p>
+                            {% elif fs.friend_status == 'accept' %}
+                                <form action="/deletefriends" method="post">
+                                    <input type="hidden" name="recevier_id" value="{{other_user.id}}">
+                                    <input type="submit" value="Remove Friend?" class="btn border-white rounded-pill spotify-words-btns red-btn">
+                                </form>
+                            {% endif %}
+                        {% elif fr %}
+                            {% if fr.friend_status == 'pending' %}
+                                <div class="d-flex justify-content-center align-items-center gap-3">
+                                    <form action="/accept" method="post">
+                                        <input type="hidden" name="sender_id" value="{{fr.sender.id}}">
+                                        <input type="submit" value="Accept Request" class="btn border-white rounded-pill spotify-words-btns green-btn">
+                                    </form>
+                                    <p class="spotify-wordsyellow">Currently Pending:</p>
+                                    <form action="/deny" method="post">
+                                        <input type="hidden" name="sender_id" value="{{fr.sender.id}}">
+                                        <input type="submit" value="Deny Request" class="btn border-white rounded-pill spotify-words-btns red-btn">
+                                    </form>
+                                </div>
+                            {% elif fr.friend_status == 'accept' %}
+                                <form action="/deletefriendr" method="post">
+                                    <input type="hidden" name="sender_id" value="{{other_user.id}}">
+                                    <input type="submit" value="Remove Friend?" class="btn border-white rounded-pill spotify-words-btns red-btn">
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            <form action="/sendfriend" method="post">
+                                    <input type="hidden" name="recevier_id" value="{{other_user.id}}">
+                                    <input type="submit" value="Add Friend?" class="btn border-white rounded-pill spotify-words-btns green-btn">
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row pt-4">
+                    <div class="col">
+                        <h4 class="text-center"><strong>Public Reccs</strong></h4>
+                        <table class="table spotify-words text-center">
+                            <thead class="spotify-pubhead-border border-3">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Artist</th>
+                                    <th>Type</th>
+                                    <th>Where?</th>
+                                </tr>
+                            </thead>
+                            <tbody  class="text-center spotify-pubbody-border border-3">
+                                {% if user_reccs %}
+                                    {% for recc in user_reccs %}
+                                        {% if recc.pop == 0 %}
+                                            <tr>
+                                                <td ><a href="/{{recc.user.id}}/reccPage" class="pink-words">{{recc.user.user_name}}</a></td>
+                                                <td>{{recc.title}}</td>
+                                                <td>{{ recc.artist }}</td>
+                                                {% if recc.aors == 0 %}
+                                                    <td>Album</td>
+                                                {% else %}
+                                                    <td>Song</td>
+                                                {% endif %}
+                                                {% if recc.heard_on == 0 %}
+                                                    <td><a target="_blank" href="https://open.spotify.com/" class="spotify-wordsgreen">Spotify</a></td>
+                                                {% elif recc.heard_on == 1 %}
+                                                    <td><a target="_blank" href="https://soundcloud.com/" class="spotify-wordsyellow">Sound Cloud</a></td>
+                                                {% elif recc.heard_on == 2 %}
+                                                    <td><a target="_blank" href="http://youtube.com" class="red-words">Youtube</a></td>
+                                                {% elif recc.heard_on == 3 %}
+                                                    <td><a target="_blank" href="http://music.apple.com" class="blue-words">Apple Music</a></td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <h4 class="text-center"><strong>Private Reccs</strong></h4>
+                        {% if fs.friend_status == 'accept' %}
+                            <table class="table spotify-words text-center">
+                                <thead class="spotify-privhead-border border-3">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Artist</th>
+                                        <th>Type</th>
+                                        <th>Where?</th>
+                                    </tr>
+                                </thead>
+                                {% for recc in user_reccs %}
+                                    {% if recc.pop != 0 %}
+                                        <tbody class="spotify-privbody-border border-3">
+                                            <tr>
+                                                <td>{{recc.title}}</td>
+                                                <td>{{ recc.artist }}</td>
+                                                {% if recc.aors == 0 %}
+                                                    <td>Album</td>
+                                                {% else %}
+                                                    <td>Song</td>
+                                                {% endif %}
+                                                {% if recc.heard_on == 0 %}
+                                                    <td><a target="_blank" href="https://open.spotify.com/" class="spotify-wordsgreen">Spotify</a></td>
+                                                {% elif recc.heard_on == 1 %}
+                                                    <td><a target="_blank" href="https://soundcloud.com/" class="spotify-wordsyellow">Sound Cloud</a></td>
+                                                {% elif recc.heard_on == 2 %}
+                                                    <td><a target="_blank" href="http://youtube.com" class="red-words">Youtube</a></td>
+                                                {% elif recc.heard_on == 3 %}
+                                                    <td><a target="_blank" href="http://music.apple.com" class="blue-words">Apple Music</a></td>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        {% elif fr.friend_status == 'accept' %}
+                            <table class="table spotify-words text-center">
+                                <thead class="spotify-privhead-border border-3">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Artist</th>
+                                        <th>Type</th>
+                                        <th>Where?</th>
+                                    </tr>
+                                </thead>
+                                {% for recc in user_reccs %}
+                                    {% if recc.pop != 0 %}
+                                        <tbody class="spotify-privbody-border border-3">
+                                            <tr>
+                                                <td>{{recc.title}}</td>
+                                                <td>{{ recc.artist }}</td>
+                                                {% if recc.aors == 0 %}
+                                                    <td>Album</td>
+                                                {% else %}
+                                                    <td>Song</td>
+                                                {% endif %}
+                                                {% if recc.heard_on == 0 %}
+                                                    <td><a target="_blank" href="https://open.spotify.com/" class="spotify-wordsgreen">Spotify</a></td>
+                                                {% elif recc.heard_on == 1 %}
+                                                    <td><a target="_blank" href="https://soundcloud.com/" class="spotify-wordsyellow">Sound Cloud</a></td>
+                                                {% elif recc.heard_on == 2 %}
+                                                    <td><a target="_blank" href="http://youtube.com" class="red-words">Youtube</a></td>
+                                                {% elif recc.heard_on == 3 %}
+                                                    <td><a target="_blank" href="http://music.apple.com" class="blue-words">Apple Music</a></td>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        {% else %}
+                            <div class="pt-3 pink-words text-center">
+                                <p><strong>MUST BE FRIENDS TO SEE!</strong></p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

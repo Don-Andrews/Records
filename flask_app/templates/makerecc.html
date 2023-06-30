@@ -1,0 +1,98 @@
+{% extends 'base.html' %} {% block content %}
+    <div class="spotify-back-body">
+        <div class="container spotify-words">
+            <div class="card-header">
+                <h2><strong>Hello, {{user.user_name}}</strong></h2>  
+            </div>
+            <div class="card-body">
+                <h3 class="text-center"><strong> Make A Recc</strong> </h3>
+                <form action="/make/recc" method="post">
+                    <input type="hidden" name="u_id" value="{{user.id}}">
+                    <div class="row mb-4 p-2">
+                        <div class="col d-flex justify-content-center gap-3">
+                            <input type="text" name="title" placeholder="Title:" class="btn border-white rounded-pill spotify-words">
+                            {% with errors = get_flashed_messages(category_filter=["recc1"]) %}
+                                {% if errors %}
+                                    {%- for msg in errors %}
+                                        <p class="text-center pink-words mt-2">{{msg}}</p>
+                                    {% endfor -%}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="col d-flex justify-content-center gap-3">
+                            <input type="text" name="artist" placeholder="Artist:" class="btn border-white rounded-pill spotify-words">
+                            {% with errors = get_flashed_messages(category_filter=["recc2"]) %}
+                                {% if errors %}
+                                    {%- for msg in errors %}
+                                        <p class="pink-words mt-2">{{msg}}</p>
+                                    {% endfor -%}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="row mb-4 p-2">
+                        <p class="text-center"><strong> Album or Song?</strong></p>
+                        {% with errors = get_flashed_messages(category_filter=["recc3"]) %}
+                            {% if errors %}
+                                {%- for msg in errors %}
+                                    <p class="text-center pink-words">{{msg}}</p>
+                                {% endfor -%}
+                            {% endif %}
+                        {% endwith %}
+                        <div class="d-flex justify-content-center align-items-center add-gap">
+                            <div>
+                                <input type="radio" name="aors" value="0" class="btn-check" id="album" autocomplete="off">
+                                <label for="album" class="btn btn-outline-success green-outline">Album</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="aors" value="1" class="btn-check" id="song" autocomplete="off">
+                                <label for="song" class="btn btn-outline-warning gold-outline">Song</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4 p-2">
+                        <p class="text-center"><strong>Public or Private?</strong></p>
+                        {% with errors = get_flashed_messages(category_filter=["recc4"]) %}
+                            {% if errors %}
+                                {%- for msg in errors %}
+                                    <p class="text-center pink-words">{{msg}}</p>
+                                {% endfor -%}
+                            {% endif %}
+                        {% endwith %}
+                        <div class="d-flex justify-content-center add-gap">
+                            <div>
+                                <input type="radio" name="pop" value="0" class="btn-check" id="pub" autocomplete="off">
+                                <label for="pub" class="btn btn-outline-info">Public</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="pop" value="1" class="btn-check" id="pri" autocomplete="off">
+                                <label for="pri" class="btn btn-outline-danger">Private</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4 p-2">
+                        <div class="col d-flex justify-content-center gap-3">
+                            <select name="heard_on"class="btn border-white rounded-pill spotify-words make-big" id="option-values">
+                                <option value="x">Heard from?</option>
+                                <option value="0">Spotify</option>
+                                <option value="1">Sound Cloud</option>
+                                <option value="2">Youtube</option>
+                                <option value="3">Apple Music</option>
+                            </select>
+                            {% with errors = get_flashed_messages(category_filter=["recc4"]) %}
+                                {% if errors %}
+                                    {%- for msg in errors %}
+                                        <p class="text-center pink-words mt-2">{{msg}}</p>
+                                    {% endfor -%}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <div class="col d-flex justify-content-center">
+                            <input type="submit" value="Create Recc" class="btn border-white rounded-pill spotify-words make-big">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

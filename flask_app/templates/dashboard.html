@@ -1,0 +1,161 @@
+{% extends 'base.html' %} {% block content %}
+    <div class="spotify-back-body">
+        <div class="container">
+            <div class="card-header pb-3 spotify-words">
+                <h2><strong>Hello, {{user.user_name}}</strong></h2> 
+            </div>
+            <div class="card-body">
+                <div class="row p-3">
+                    <div class="col">
+                        <h3 class="spotify-words text-center"><strong>Public Reccs</strong> </h3>
+                        <table class="table spotify-words text-center">
+                            <thead class="spotify-pubhead-border border-3">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Artist</th>
+                                    <th>Type</th>
+                                    <th>Where?</th>
+                                </tr>
+                            </thead>
+                            <tbody class="spotify-pubbody-border border-3">
+                                {% if my_reccs %}
+                                    {% for recc in my_reccs %}
+                                        {% if recc.pop == 0 %}
+                                            <tr>
+                                                <td>{{recc.title}}</td>
+                                                <td>{{ recc.artist }}</td>
+                                                {% if recc.aors == 0 %}
+                                                    <td>Album</td>
+                                                {% else %}
+                                                    <td>Song</td>
+                                                {% endif %}
+                                                {% if recc.heard_on == 0 %}
+                                                <td><a target="_blank" href="https://open.spotify.com/" class="spotify-wordsgreen">Spotify</a></td>
+                                                {% elif recc.heard_on == 1 %}
+                                                <td><a target="_blank" href="https://soundcloud.com/" class="spotify-wordsyellow">Sound Cloud</a></td>
+                                                {% elif recc.heard_on == 2 %}
+                                                <td><a target="_blank" href="http://youtube.com" class="red-words">Youtube</a></td>
+                                                {% elif recc.heard_on == 3 %}
+                                                <td><a target="_blank" href="http://music.apple.com" class="blue-words">Apple Music</a></td>
+                                                {% endif %}
+                                                <td class="d-flex justify-content-center align-items-center gap-2 p-3">
+                                                    <a href="/edit/recc/{{recc.id}}"><img src="{{ url_for('static', filename='edit.png') }}" alt="edit"></a>
+                                                    <form action="/deleterecc" method="post">
+                                                        <input type="hidden" name="id" value="{{recc.id}}">
+                                                        <input type="submit" value="X" class="spotify-words-btns">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                        <div class="my-container">
+                            <input type="text" name="usersearch" placeholder="User Search" class="btn border-white rounded-pill search-input spotify-words">
+                            <div class="dropdown-menu">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-4">
+                    <div class="col">
+                        <h3  class="spotify-words text-center"><strong>Private Reccs</strong> </h3>
+                        <table class="table spotify-words text-center">
+                            <thead class="border-3 spotify-privhead-border">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Artist</th>
+                                    <th>Type</th>
+                                    <th>Where?</th>
+                                </tr>
+                            </thead>
+                            <tbody class="border-3 spotify-privbody-border">
+                                {% if my_reccs %}
+                                    {% for recc in my_reccs %}
+                                        {% if recc.pop != 0 %}
+                                            <tr>
+                                                <td>{{recc.title}}</td>
+                                                <td>{{ recc.artist }}</td>
+                                                {% if recc.aors == 0 %}
+                                                    <td>Album</td>
+                                                {% else %}
+                                                    <td>Song</td>
+                                                {% endif %}
+                                                {% if recc.heard_on == 0 %}
+                                                <td><a target="_blank" href="https://open.spotify.com/" class="spotify-wordsgreen">Spotify</a></td>
+                                                {% elif recc.heard_on == 1 %}
+                                                <td><a target="_blank" href="https://soundcloud.com/" class="spotify-wordsyellow">Sound Cloud</a></td>
+                                                {% elif recc.heard_on == 2 %}
+                                                <td><a target="_blank" href="http://youtube.com" class="red-words">Youtube</a></td>
+                                                {% elif recc.heard_on == 3 %}
+                                                <td><a target="_blank" href="http://music.apple.com" class="blue-words">Apple Music</a></td>
+                                                {% endif %}
+                                                <td class="d-flex justify-content-center align-items-center gap-2 p-3">
+                                                    <a href="/edit/recc/{{recc.id}}"><img src="{{ url_for('static', filename='edit.png') }}" alt="edit"></a>
+                                                    <form action="/deleterecc" method="post">
+                                                        <input type="hidden" name="id" value="{{recc.id}}">
+                                                        <input type="submit" value="X" class="spotify-words-btns">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-4 d-flex">
+                        <table class="table spotify-words table-borderless">
+                            <thead class="text-center border-bottom">
+                                <tr>
+                                    <th>Friends</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                            {% if frienda %} 
+                                    {% for friend in frienda %} 
+                                        {% if friend.reciever.id == user.id %}
+                                        <tr class="text-center">
+                                            <td><a href="/{{friend.sender.id}}/reccPage" class="spotify-wordsgreen">{{friend.sender.user_name}}</a></td>
+                                        </tr>
+                                        {% elif friend.sender.id == user.id %} 
+                                        <tr class="text-center">
+                                            <td><a href="/{{friend.reciever.id}}/reccPage" class="spotify-wordsgreen">{{friend.reciever.user_name}}</a></td>
+                                        </tr>
+                                        {% endif %}
+                                    {% endfor %} 
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <table class="table spotify-words table-borderless">
+                            <thead class="text-center border-bottom">
+                                <tr>
+                                    <th>Pending</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                {% for friend in friends %}
+                                    <tr class="text-center">
+                                        {% if friend.sender.id == user.id %}
+                                            <td><a href="/{{friend.reciever.id}}/reccPage" class="spotify-words">{{friend.reciever.user_name}}</a></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                {% for friend in friendr %}
+                                    <tr class="text-center">
+                                        {% if friend.reciever.id == user.id %}
+                                            <td><a href="/{{friend.sender.id}}/reccPage" class="spotify-wordsyellow">{{friend.sender.user_name}}</a></td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}
